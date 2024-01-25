@@ -1,0 +1,26 @@
+.banner{
+    width: 100%;
+    height: calc(100vh - 60px);
+    display: flex;
+    background-size: cover;
+    background-position: center center;
+    align-items: center;
+    justify-content: center;
+}
+.banner__inner{
+    text-align: center;
+}
+.banner__inner .banner__title{
+    font-size: 56px;
+}
+
+.banner__inner .banner__subtitle{
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.banner__inner .banner__title,
+.banner__inner .banner__subtitle{
+    color: #fff;
+    font-weight: 700;
+}
