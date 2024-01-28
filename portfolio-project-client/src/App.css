@@ -149,3 +149,13 @@ ul{
   -webkit-box-shadow: 0 15px 20px -8px #fd6a6d;
   box-shadow: 0 15px 20px -8px #fd6a6d;
 }
+
+.form__input__error{
+  font-size: 12px;
+  color: red;
+  display: none;
+}
+
+input:invalid[focused="true"] ~ span.form__input__error{
+  display: block;
+}
