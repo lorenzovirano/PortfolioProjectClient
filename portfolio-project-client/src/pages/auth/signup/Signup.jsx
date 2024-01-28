@@ -1,5 +1,6 @@
 import './Signup.css';
 import Header from "../../../components/navbar/Header";
+import FormInput from "../../../components/formInput/FormInput";
 
 export default function Signup(props){
     return(
@@ -10,19 +11,9 @@ export default function Signup(props){
                     <form action="#" className="form form__signup">
                         <h3 className="form__title">Sign up</h3>
                         <p className="form__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur eos magni odit praesentium quo? Nemo neque nesciunt qui repellat sed.</p>
-                        <div className="form__input signup__input">
-                            <label>Lorem</label>
-                            <input type="text"/>
-                        </div>
-                        <div className="form__input signup__input">
-                            <label>Lorem</label>
-                            <input type="text"/>
-                        </div>
-                        <div className="form__input signup__input">
-                            <label>Lorem</label>
-                            <input type="text"/>
-                        </div>
-
+                        <FormInput type={"text"} label={"Lorem"} placeholder={"Lorem"}/>
+                        <FormInput type={"text"} label={"Lorem"} placeholder={"Lorem"}/>
+                        <FormInput type={"text"} label={"Lorem"} placeholder={"Lorem"}/>
                         <div className="form__submit signup__submit">
                             <button className="form__submit__button">Submit</button>
                         </div>

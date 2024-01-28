@@ -1,5 +1,6 @@
 import './Login.css';
 import Header from "../../../components/navbar/Header";
+import FormInput from "../../../components/formInput/FormInput";
 
 export default function Login(){
     return(
@@ -10,19 +11,9 @@ export default function Login(){
                     <form action="#" className="form form__login">
                         <h3 className="form__title">Login</h3>
                         <p className="form__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur eos magni odit praesentium quo? Nemo neque nesciunt qui repellat sed.</p>
-                        <div className="form__input login__input">
-                            <label>Lorem</label>
-                            <input type="text"/>
-                        </div>
-                        <div className="form__input login__input">
-                            <label>Lorem</label>
-                            <input type="text"/>
-                        </div>
-                        <div className="form__input login__input">
-                            <label>Lorem</label>
-                            <input type="text"/>
-                        </div>
-
+                        <FormInput type={"text"} label={"Lorem"} placeholder={"Lorem"}/>
+                        <FormInput type={"text"} label={"Lorem"} placeholder={"Lorem"}/>
+                        <FormInput type={"text"} label={"Lorem"} placeholder={"Lorem"}/>
                         <div className="form__submit login__submit">
                             <button className="form__submit__button">Submit</button>
                         </div>
