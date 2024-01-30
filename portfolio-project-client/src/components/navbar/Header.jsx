@@ -1,7 +1,7 @@
 import './Header.css';
 import {Link} from "react-router-dom";
 import Container from 'react-bootstrap/Container';
-import logo from '../../images/slr-camera-512.png'
+import logo from '../../../public/images/slr-camera-512.png'
 
 export default function Header(){
     return(
