@@ -78,7 +78,7 @@ export default function Signup(props){
                         </div>
                     </form>
                 </div>
-                <div className="form__banner" style={{backgroundImage: `url('https://images.unsplash.com/photo-1495745966610-2a67f2297e5e?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`}}>
+                <div className="form__banner" style={{backgroundImage: `url('https://images.unsplash.com/photo-1517956050595-8932d6d6b740?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`}}>
                     <div className="form__banner__inner">
                         <h4 className="form__banner__title">Lorem ipsum</h4>
                         <p className="form__banner__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A cumque debitis dolor earum eum fugit ipsum iusto ullam ut voluptatum.</p>
