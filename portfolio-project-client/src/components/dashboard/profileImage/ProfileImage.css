@@ -1,0 +1,27 @@
+.profile-image{
+    margin-top: 100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-image__img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid #FB4B4E;
+    background-size: cover;
+    background-position: center;
+    -webkit-box-shadow: 0 0 10px 3px rgba(34,34,34,0.3);
+    box-shadow: 0 0 10px 3px rgba(34,34,34,0.3);
+}
+
+.profile-image__name{
+    font-size: 26px;
+    color: #222222;
+    font-weight: bold;
+    text-transform: capitalize;
+}
