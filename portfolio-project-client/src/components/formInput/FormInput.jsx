@@ -15,8 +15,9 @@ export default function FormInput(props){
                 onChange={onChange}
                 onBlur={handleFocus}
                 onFocus={() => inputProps.name === "confirmPassword" && setFocused(true)}
-                focused={focused.toString()
-            } />
+                focused={focused.toString()}
+                style={{background: "transparent"}}
+            />
             <span className="form__input__error">{errorMessage}</span>
         </div>
     )
