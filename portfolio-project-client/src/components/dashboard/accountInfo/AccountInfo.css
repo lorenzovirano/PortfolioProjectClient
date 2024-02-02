@@ -1,0 +1,13 @@
+
+.form--account__info{
+    border-radius: 12px;
+    background: #ededed;
+    box-shadow:  5px 5px 10px #afafaf,
+    -5px -5px 10px #ffffff;
+    padding: 30px;
+    width: 100%;
+}
+.form__container--account__info{
+    min-height: max-content;
+    margin-top: 100px;
+}

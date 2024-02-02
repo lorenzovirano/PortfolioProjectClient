@@ -27,6 +27,7 @@ body {
   line-height: 1;
   font-family: Arial, serif;
   height: 100%;
+  background: #ededed;
 }
 ol, ul {
   list-style: none;
@@ -93,6 +94,10 @@ ul{
   padding: 0 50px;
   position: relative;
   z-index: 2;
+}
+
+.form__wrapper .form__container--full-width{
+  width: 100%;
 }
 
 .form__container .form{

@@ -2,6 +2,7 @@ import './Login.css';
 import Header from "../../../components/navbar/Header";
 import FormInput from "../../../components/formInput/FormInput";
 import {useState} from "react";
+import Footer from "../../../components/footer/Footer";
 
 export default function Login(){
     const handleSubmit = (e) => {
@@ -84,6 +85,7 @@ export default function Login(){
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     )
 }

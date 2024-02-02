@@ -15,8 +15,8 @@
     border: 5px solid #FB4B4E;
     background-size: cover;
     background-position: center;
-    -webkit-box-shadow: 0 0 10px 3px rgba(34,34,34,0.3);
-    box-shadow: 0 0 10px 3px rgba(34,34,34,0.3);
+    -webkit-box-shadow: 0 0 10px 3px rgba(34,34,34,.25);
+    box-shadow: 0 0 10px 3px rgba(34,34,34,.25);
 }
 
 .profile-image__name{

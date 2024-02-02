@@ -2,6 +2,7 @@ import './Signup.css';
 import Header from "../../../components/navbar/Header";
 import FormInput from "../../../components/formInput/FormInput";
 import {useState} from "react";
+import Footer from "../../../components/footer/Footer";
 
 export default function Signup(props){
 
@@ -85,6 +86,7 @@ export default function Signup(props){
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     )
 }
