@@ -13,13 +13,14 @@ export default function Account(props){
             <Container>
                 <Row>
                     <Col>
-                        <ProfileImage profileImage={"https://images.pexels.com/photos/17371711/pexels-photo-17371711/free-photo-of-mano-ragazza-fiore-ritratto.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"} name={"Francesca Rossi"} />
+                        <ProfileImage profileImage={"https://images.pexels.com/photos/17371711/pexels-photo-17371711/free-photo-of-mano-ragazza-fiore-ritratto.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"} name={"Francesca Rossi"} role={"Fotografa"}/>
                     </Col>
-                </Row>
-                <Row>
                     <Col>
                         <AccountInfo />
                     </Col>
+                </Row>
+                <Row>
+
                 </Row>
             </Container>
             <Footer />

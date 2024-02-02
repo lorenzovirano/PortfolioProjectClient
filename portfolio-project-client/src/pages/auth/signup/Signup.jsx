@@ -3,14 +3,9 @@ import Header from "../../../components/navbar/Header";
 import FormInput from "../../../components/formInput/FormInput";
 import {useState} from "react";
 import Footer from "../../../components/footer/Footer";
+import axios from "axios";
 
 export default function Signup(props){
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(values);
-    }
-
     const onChange = (e) => {
         setValues({...values, [e.target.name]: e.target.value})
     }
@@ -21,6 +16,17 @@ export default function Signup(props){
         password: "",
         confirmPassword: ""
     });
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("http://localhost:8000/auth/register", values);
+            console.log("User Created:", response.data);
+            window.location.replace("/login");
+        } catch (error) {
+            console.error("User not created", error);
+        }
+    }
 
     const inputs = [
         {

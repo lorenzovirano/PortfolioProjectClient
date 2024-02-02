@@ -8,6 +8,7 @@ export default function ProfileImage(props){
 
                 </div>
                 <span className={"profile-image__name"}>{props.name}</span>
+                <span className={"profile-image__role"}>{props.role}</span>
             </div>
         </>
     )

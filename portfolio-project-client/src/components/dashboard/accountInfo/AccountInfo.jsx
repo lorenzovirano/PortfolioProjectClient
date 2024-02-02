@@ -23,6 +23,21 @@ export default function AccountInfo(){
     const inputs = [
         {
             id: 1,
+            name: "nome",
+            type: "text",
+            label: "Nome",
+            placeholder: "Nome"
+        },
+        {
+            id: 2,
+            name: "cognome",
+            type: "text",
+            label: "Cognome",
+            placeholder: "Cognome"
+
+        },
+        {
+            id: 3,
             name: "username",
             type: "text",
             label: "Username",
@@ -32,15 +47,7 @@ export default function AccountInfo(){
             required: true
         },
         {
-            id: 2,
-            name: "email",
-            type: "email",
-            label: "Email",
-            errorMessage: "Inserisci una mail valida",
-            placeholder: "Email"
-        },
-        {
-            id: 3,
+            id: 4,
             name: "password",
             type: "password",
             label: "Password",
@@ -51,7 +58,7 @@ export default function AccountInfo(){
             newRow: true
         },
         {
-            id: 4,
+            id: 5,
             name: "confirmPassword",
             type: "password",
             label: "Conferma Password",
@@ -83,6 +90,7 @@ export default function AccountInfo(){
                         </>
                     ))}
                     <div className="form__submit signup__submit">
+                        <div className="form__submit__unlock"><i className="bi bi-pencil"></i></div>
                         <button className="form__submit__button">Submit</button>
                     </div>
                 </form>

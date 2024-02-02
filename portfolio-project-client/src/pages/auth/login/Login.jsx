@@ -3,10 +3,18 @@ import Header from "../../../components/navbar/Header";
 import FormInput from "../../../components/formInput/FormInput";
 import {useState} from "react";
 import Footer from "../../../components/footer/Footer";
+import axios from "axios";
 
 export default function Login(){
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        try {
+            const response = await axios.post("http://localhost:8000/auth/login", values);
+            console.log("Utente loggato:", response.data);
+            window.location.replace("/account");
+        } catch (error) {
+            console.error("User non loggato", error);
+        }
         console.log(values);
     }
 
@@ -16,9 +24,7 @@ export default function Login(){
 
     const [values, setValues] = useState({
         username: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
+        password: ""
     });
 
     const inputs = [
@@ -34,14 +40,6 @@ export default function Login(){
         },
         {
             id: 2,
-            name: "email",
-            type: "email",
-            label: "Email",
-            errorMessage: "Inserisci una mail valida",
-            placeholder: "Email"
-        },
-        {
-            id: 3,
             name: "password",
             type: "password",
             label: "Password",
@@ -50,16 +48,6 @@ export default function Login(){
             pattern:`^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
             required: true
         },
-        {
-            id: 4,
-            name: "confirmPassword",
-            type: "password",
-            label: "Conferma Password",
-            placeholder: "Conferma Password",
-            errorMessage: "Le password non coincidono",
-            pattern: values.password,
-            required: true
-        }
     ]
 
     return(
