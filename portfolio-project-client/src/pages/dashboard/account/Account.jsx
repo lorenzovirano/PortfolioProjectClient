@@ -5,6 +5,7 @@ import {Col, Row} from "react-bootstrap";
 import ProfileImage from "../../../components/dashboard/profileImage/ProfileImage";
 import AccountInfo from "../../../components/dashboard/accountInfo/AccountInfo";
 import Footer from "../../../components/footer/Footer";
+import LatestWork from "../../../components/dashboard/latestWork/LatestWork";
 
 export default function Account(props){
     return (
@@ -20,7 +21,9 @@ export default function Account(props){
                     </Col>
                 </Row>
                 <Row>
-
+                    <Col>
+                        <LatestWork />
+                    </Col>
                 </Row>
             </Container>
             <Footer />

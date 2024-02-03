@@ -1,0 +1,52 @@
+.latest-work{
+    margin-top: 50px;
+}
+.latest-work__cards{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.latest-work .latest-work__title{
+    font-size: 36px;
+    font-weight: bold;
+    color: #FB4B4E;
+}
+
+
+.latest-work__card__title{
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 15px 0 15px;
+}
+
+.latest-work__card{
+    width: 300px;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: .2s ease-in;
+}
+.latest-work__card:hover{
+    transform: rotate(3deg) scale(1.05);
+}
+
+.latest-work__card__image{
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center center;
+}
+
+.latest-work__card__par{
+    padding: 15px;
+}
+
+.latest-work__card__inner{
+    background: #fff;
+}
+
+.latest-work__card a{
+    text-decoration: none;
+    color: #222222;
+}
