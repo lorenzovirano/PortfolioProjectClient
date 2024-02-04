@@ -131,6 +131,11 @@ ul{
   border-radius: 12px;
 }
 
+.form .form__input input:disabled{
+  border: 2px solid #bebebe;
+  cursor: not-allowed;
+}
+
 .form__submit{
   display: flex;
   justify-content: flex-end;

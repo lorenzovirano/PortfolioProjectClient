@@ -6,18 +6,53 @@ import ProfileImage from "../../../components/dashboard/profileImage/ProfileImag
 import AccountInfo from "../../../components/dashboard/accountInfo/AccountInfo";
 import Footer from "../../../components/footer/Footer";
 import LatestWork from "../../../components/dashboard/latestWork/LatestWork";
+import axios from "axios";
+import Cookies from "js-cookie";
+import {useEffect} from "react";
+import {useState} from "react";
 
 export default function Account(props){
+    const [username, setUsername] = useState("Username");
+    const [name, setName] = useState("Nome");
+    const [surname, setSurname] = useState("Cognome");
+
+    const getUserInfo = async () => {
+        axios.request({
+            headers: {
+                Authorization: `Bearer ${Cookies.get('token')}`
+            },
+            method: "GET",
+            url: `http://localhost:8000/user/profile`
+        }).then(response => {
+            console.dir(response.data);
+            if(response.data.data.user.username){
+                setUsername(response.data.data.user.username);
+            }
+            if(response.data.data.user.name){
+                setName(response.data.data.user.name);
+            }
+            if(response.data.data.user.surname){
+                setSurname(response.data.data.user.surname);
+            }
+            console.log(username);
+        })
+    }
+
+    useEffect(() => {
+        getUserInfo();
+    })
+
+
     return (
         <>
             <Header />
             <Container>
                 <Row>
                     <Col>
-                        <ProfileImage profileImage={"https://images.pexels.com/photos/17371711/pexels-photo-17371711/free-photo-of-mano-ragazza-fiore-ritratto.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"} name={"Francesca Rossi"} role={"Fotografa"}/>
+                        <ProfileImage profileImage={"https://cdn.icon-icons.com/icons2/1369/PNG/512/-account-circle_89831.png"} name={username} role={"Fotografo"}/>
                     </Col>
                     <Col>
-                        <AccountInfo />
+                        <AccountInfo username={username} name={name} surname={surname}/>
                     </Col>
                 </Row>
                 <Row>

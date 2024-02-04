@@ -3,17 +3,39 @@ import FormInput from "../../formInput/FormInput";
 import {useState} from "react";
 import {Col, Row} from "react-bootstrap";
 
-export default function AccountInfo(){
+export default function AccountInfo(props){
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(values);
     }
+    const [disabledInputs, setDisabledInputs] = useState({
+        name: true,
+        surname: true,
+        username: true,
+        email: true,
+        password: true,
+        confirmPassword: true
+    });
+
+    const handleUnlockClick = () => {
+        setDisabledInputs({
+            name: false,
+            surname: false,
+            username: true,
+            email: false,
+            password: false,
+            confirmPassword: false
+        });
+    };
+
 
     const onChange = (e) => {
         setValues({...values, [e.target.name]: e.target.value})
     }
 
     const [values, setValues] = useState({
+        name: "",
+        surname: "",
         username: "",
         email: "",
         password: "",
@@ -26,25 +48,27 @@ export default function AccountInfo(){
             name: "nome",
             type: "text",
             label: "Nome",
-            placeholder: "Nome"
+            placeholder: props.name,
+            disabled: disabledInputs.name
         },
         {
             id: 2,
             name: "cognome",
             type: "text",
             label: "Cognome",
-            placeholder: "Cognome"
-
+            placeholder: props.surname,
+            disabled: disabledInputs.surname
         },
         {
             id: 3,
             name: "username",
             type: "text",
             label: "Username",
-            placeholder: "Username",
+            placeholder: props.username,
             errorMessage: "Lo username deve contenere 3-16 caratteri",
             pattern: "^[A-Za-z0-9]{3,16}$",
-            required: true
+            required: true,
+            disabled: disabledInputs.username
         },
         {
             id: 4,
@@ -55,7 +79,8 @@ export default function AccountInfo(){
             errorMessage: "Lo password deve contenere 8-20 caratteri, un carattere speciale ecc..",
             pattern:`^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
             required: true,
-            newRow: true
+            newRow: true,
+            disabled: disabledInputs.password
         },
         {
             id: 5,
@@ -65,7 +90,8 @@ export default function AccountInfo(){
             placeholder: "Conferma Password",
             errorMessage: "Le password non coincidono",
             pattern: values.password,
-            required: true
+            required: true,
+            disabled: disabledInputs.confirmPassword
         }
     ]
 
@@ -78,11 +104,11 @@ export default function AccountInfo(){
                             {index % 2 === 0 && (
                                 <Row style={{gap: "20px"}}>
                                     <Col>
-                                        <FormInput {...inputs[index]} value={values[inputs[index].name]} onChange={onChange} />
+                                        <FormInput {...inputs[index]} value={values[inputs[index].name]} onChange={onChange}/>
                                     </Col>
                                     <Col>
                                         {inputs[index + 1] && (
-                                            <FormInput {...inputs[index + 1]} value={values[inputs[index + 1].name]} onChange={onChange} />
+                                            <FormInput {...inputs[index + 1]} value={values[inputs[index + 1].name]} onChange={onChange}/>
                                         )}
                                     </Col>
                                 </Row>
@@ -90,7 +116,9 @@ export default function AccountInfo(){
                         </>
                     ))}
                     <div className="form__submit signup__submit">
-                        <div className="form__submit__unlock"><i className="bi bi-pencil"></i></div>
+                        <div className="form__submit__unlock" onClick={handleUnlockClick}>
+                            <i className="bi bi-pencil"></i>
+                        </div>
                         <button className="form__submit__button">Submit</button>
                     </div>
                 </form>

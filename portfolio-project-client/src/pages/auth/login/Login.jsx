@@ -4,18 +4,30 @@ import FormInput from "../../../components/formInput/FormInput";
 import {useState} from "react";
 import Footer from "../../../components/footer/Footer";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export default function Login(){
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post("http://localhost:8000/auth/login", values);
-            console.log("Utente loggato:", response.data);
+            console.log("Utente loggato:", response.data.data.user);
+            Cookies.set('token', response.data.data.jwt, { expires: 7, secure: true });
             window.location.replace("/account");
         } catch (error) {
-            console.error("User non loggato", error);
+            // Esempio di gestione specifica di alcuni tipi di errori
+            if (error.response) {
+                // La richiesta è stata effettuata e il server ha risposto con uno stato diverso da 2xx
+                console.error("Risposta dal server:", error.response.data);
+                console.error("Stato della risposta:", error.response.status);
+            } else if (error.request) {
+                // La richiesta è stata effettuata, ma non è stata ricevuta alcuna risposta
+                console.error("La richiesta è stata effettuata, ma nessuna risposta ricevuta");
+            } else {
+                // Si è verificato un errore durante la configurazione della richiesta
+                console.error("Errore durante la configurazione della richiesta:", error.message);
+            }
         }
-        console.log(values);
     }
 
     const onChange = (e) => {
