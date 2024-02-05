@@ -10,8 +10,10 @@ const Comments = ({ comments, onAddComment }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        onAddComment(newComment);
-        setNewComment("");
+        if (newComment.trim() !== "") {
+            onAddComment(newComment);
+            setNewComment("");
+        }
     }
     
 
