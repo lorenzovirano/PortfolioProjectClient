@@ -4,6 +4,15 @@ import {useState} from "react";
 import {Col, Row} from "react-bootstrap";
 
 export default function AccountInfo(props){
+    const [values, setValues] = useState({
+        name: "",
+        surname: "",
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+    });
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(values);
@@ -32,15 +41,6 @@ export default function AccountInfo(props){
     const onChange = (e) => {
         setValues({...values, [e.target.name]: e.target.value})
     }
-
-    const [values, setValues] = useState({
-        name: "",
-        surname: "",
-        username: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
-    });
 
     const inputs = [
         {
@@ -100,7 +100,7 @@ export default function AccountInfo(props){
             <div className={"form__container form__container--full-width form__container--account__info"}>
                 <form className="form form--account__info">
                     {inputs.map((input, index) => (
-                        <>
+                        <div key={input.id}>
                             {index % 2 === 0 && (
                                 <Row style={{gap: "20px"}}>
                                     <Col>
@@ -113,7 +113,7 @@ export default function AccountInfo(props){
                                     </Col>
                                 </Row>
                             )}
-                        </>
+                        </div>
                     ))}
                     <div className="form__submit signup__submit">
                         <div className="form__submit__unlock" onClick={handleUnlockClick}>

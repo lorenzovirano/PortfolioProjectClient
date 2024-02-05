@@ -2,13 +2,16 @@ import {useState} from "react";
 
 export default function FormInput(props){
     const [focused, setFocused] = useState(false)
-    const {label, onChange, id, errorMessage, ...inputProps} = props;
+    const { label, onChange, id, errorMessage, newRow, ...inputProps } = props;
 
     const handleFocus = (e) => {
         setFocused(true);
     }
+
+    const rowClassName = newRow ? 'form__new-row' : '';
+
     return (
-        <div className="form__input">
+        <div className={`form__input ${rowClassName}`}>
             <label>{label}</label>
             <input
                 {...inputProps}
