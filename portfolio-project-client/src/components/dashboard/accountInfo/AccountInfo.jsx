@@ -2,26 +2,59 @@ import './AccountInfo.css';
 import FormInput from "../../formInput/FormInput";
 import {useState} from "react";
 import {Col, Row} from "react-bootstrap";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 export default function AccountInfo(props){
     const [values, setValues] = useState({
         name: "",
         surname: "",
-        username: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
+        username: props.username,
+        password: ""
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        try {
+            const response = await axios.post(
+                "http://localhost:8000/api/v1/user/update",
+                {
+                    values
+                },
+            {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get('token')}`,
+                },
+            });
+            console.log(response);
+        } catch (error){
+            console.log("ERRAMENTO: "+ error);
+        }
+            /*const response = await axios.request({
+                headers: {
+                    Authorization: `Bearer ${Cookies.get('token')}`,
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET, POST, PUT',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                method: "POST",
+                url: 'http://localhost:8000/api/v1/user/update',
+                data: {
+                    values
+                }
+            });
+            console.log("User Updated:", response.data)
+        } catch(error){
+            console.log("ERRAMENTO: "+ error);
+            //window.location.replace("/account");
+        }*/
+
         console.log(values);
     }
     const [disabledInputs, setDisabledInputs] = useState({
         name: true,
         surname: true,
         username: true,
-        email: true,
         password: true,
         confirmPassword: true
     });
@@ -31,9 +64,7 @@ export default function AccountInfo(props){
             name: false,
             surname: false,
             username: true,
-            email: false,
-            password: false,
-            confirmPassword: false
+            password: false
         });
     };
 
@@ -45,7 +76,7 @@ export default function AccountInfo(props){
     const inputs = [
         {
             id: 1,
-            name: "nome",
+            name: "name",
             type: "text",
             label: "Nome",
             placeholder: props.name,
@@ -53,7 +84,7 @@ export default function AccountInfo(props){
         },
         {
             id: 2,
-            name: "cognome",
+            name: "surname",
             type: "text",
             label: "Cognome",
             placeholder: props.surname,
@@ -81,17 +112,6 @@ export default function AccountInfo(props){
             required: true,
             newRow: true,
             disabled: disabledInputs.password
-        },
-        {
-            id: 5,
-            name: "confirmPassword",
-            type: "password",
-            label: "Conferma Password",
-            placeholder: "Conferma Password",
-            errorMessage: "Le password non coincidono",
-            pattern: values.password,
-            required: true,
-            disabled: disabledInputs.confirmPassword
         }
     ]
 
@@ -119,7 +139,7 @@ export default function AccountInfo(props){
                         <div className="form__submit__unlock" onClick={handleUnlockClick}>
                             <i className="bi bi-pencil"></i>
                         </div>
-                        <button className="form__submit__button">Submit</button>
+                        <button className="form__submit__button" onClick={handleSubmit}>Submit</button>
                     </div>
                 </form>
             </div>
