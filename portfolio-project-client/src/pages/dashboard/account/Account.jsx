@@ -24,7 +24,7 @@ export default function Account(props){
                 Authorization: `Bearer ${Cookies.get('token')}`
             },
             method: "GET",
-            url: `http://localhost:8000/user/profile`
+            url: `http://localhost:8000/api/v1/user/profile`
         }).then(response => {
             if(response.data.data.user.username){
                 setUsername(response.data.data.user.username);

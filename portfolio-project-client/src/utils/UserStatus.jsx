@@ -14,7 +14,7 @@ const useUserStatus = () => {
                         Authorization: `Bearer ${Cookies.get('token')}`
                     },
                     method: "GET",
-                    url: `http://localhost:8000/user/checkUser`
+                    url: `http://localhost:8000/api/v1/user/checkUser`
                 });
 
                 const isLoggedIn = response.data.code === "200";
