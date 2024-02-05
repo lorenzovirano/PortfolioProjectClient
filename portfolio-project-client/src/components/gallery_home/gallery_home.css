@@ -79,3 +79,17 @@ color: #FB4B4E;
     z-index: 999;
   }
 
+  @media screen and (max-width: 600px) {
+    .commentBox {
+        display: block;
+        overflow: auto;
+        min-width: 600px;
+        z-index: 999;
+    }
+}
+@media screen and (max-width: 600px) {
+    .closeIcon {
+        right: unset; 
+        left: 415px;
+    }
+}
