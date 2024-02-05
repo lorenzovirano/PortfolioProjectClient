@@ -23,9 +23,9 @@ const Comments = ({ comments, onAddComment }) => {
             <ul>
                 {comments.map((comment, index) => (
                     <li key={index}>
-                         <div className="ProfileUserComment">
-                       <img src={"/landscape.png"} alt="ProfilePicComment" />
-                       <p className="NameProfileComment">hfejddsjfc_refvwf04</p>
+                        <div className="ProfileUserComment">
+                           <img className={"comment__img"} src={"/landscape.png"} alt="ProfilePicComment" />
+                           <p className="NameProfileComment">Lorem ipsum</p>
                         </div>
                        <p className="message"> {comment} </p>
                     </li>
