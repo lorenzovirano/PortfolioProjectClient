@@ -56,13 +56,11 @@ ul{
   margin: auto;
 }
 .form__wrapper .form__banner{
-  width: calc(50% + 10px);
+  width: 50%;
   height: 100%;
   min-height: calc(100vh - 60px);
   background-size: cover;
   background-position: center center;
-  position: relative;
-  z-index: 1;
   display: flex;
   align-items: flex-end;
 }
@@ -169,4 +167,28 @@ ul{
 
 input:invalid[focused="true"] ~ span.form__input__error{
   display: block;
+}
+
+@media only screen and (max-width: 1000px) {
+  .form__container{
+    width: 60%;
+  }
+  .form__wrapper .form__banner{
+    width: 40%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .form__wrapper{
+    flex-direction: column;
+  }
+  .form__container{
+    width: 100%;
+  }
+  .form__wrapper .form__banner{
+    width: 100%;
+  }
+  .form__container--account__info{
+    padding: 0;
+  }
 }
