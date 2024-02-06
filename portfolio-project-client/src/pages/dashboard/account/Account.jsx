@@ -32,6 +32,9 @@ export default function Account(props){
             if(response.data.data.user.name){
                 setName(response.data.data.user.name);
             }
+            if(response.data.data.user.surname){
+                setSurname(response.data.data.user.surname);
+            }
         })
     }
 
