@@ -69,19 +69,19 @@ export default function Login(){
                 <div className="form__container">
                     <form onSubmit={handleSubmit} className="form form__login">
                         <h3 className="form__title">Login</h3>
-                        <p className="form__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur eos magni odit praesentium quo? Nemo neque nesciunt qui repellat sed.</p>
+                        <p className="form__text">Accedi ora in Portfolio Project per creare in pochi minuti il tuo portfolio fotografico.</p>
                         {inputs.map((input) => (
                             <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange}/>
                         ))}
                         <div className="form__submit login__submit">
-                            <button className="form__submit__button">Submit</button>
+                            <button className="form__submit__button">Accedi</button>
                         </div>
                     </form>
                 </div>
                 <div className="form__banner" style={{backgroundImage: `url('https://images.unsplash.com/photo-1495745966610-2a67f2297e5e?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`}}>
                     <div className="form__banner__inner">
-                        <h4 className="form__banner__title">Lorem ipsum</h4>
-                        <p className="form__banner__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A cumque debitis dolor earum eum fugit ipsum iusto ullam ut voluptatum.</p>
+                        <h4 className="form__banner__title">Portfolio Project è facile da utilizzare</h4>
+                        <p className="form__banner__text">Accedi, carica i tuoi lavori e potrai avere in pochissimo tempo una pagina personale da poter condividere con i tuoi clienti!</p>
                     </div>
                 </div>
             </div>

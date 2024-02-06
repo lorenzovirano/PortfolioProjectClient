@@ -57,7 +57,7 @@ export default function Account(props){
                 <Container>
                     <Row>
                         <Col>
-                            <ProfileImage profileImage={"https://cdn.icon-icons.com/icons2/1369/PNG/512/-account-circle_89831.png"} name={username} role={"Fotografo"}/>
+                            <ProfileImage profileImage={"https://cdn.icon-icons.com/icons2/1369/PNG/512/-account-circle_89831.png"}  name={name === 'Name' && surname === 'Surname' ? username : `${name} ${surname}`} role={"Fotografo"}/>
                         </Col>
                         <Col>
                             <AccountInfo username={username} name={name} surname={surname} userId={userId}/>

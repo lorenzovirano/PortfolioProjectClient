@@ -28,7 +28,10 @@ export default function AccountInfo(props){
                 'Authorization': `Bearer ${Cookies.get('token')}`,
                 'Content-Type': 'application/json',
             }
-        }).then((response) => {console.log(response.status, response.data)});
+        }).then((response) => {
+            console.log(response.status, response.data)
+            window.location.replace("/account");
+        });
         console.log(values);
     }
     const [disabledInputs, setDisabledInputs] = useState({
