@@ -2,6 +2,8 @@ import './AccountInfo.css';
 import FormInput from "../../formInput/FormInput";
 import {useState} from "react";
 import {Col, Row} from "react-bootstrap";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 export default function AccountInfo(props){
     const [values, setValues] = useState({
@@ -15,6 +17,18 @@ export default function AccountInfo(props){
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const userData = {
+            name: values.name,
+            surname: values.surname,
+            username: values.username,
+            password: values.password,
+        };
+        axios.post(`http://localhost:8000/api/v1/user/update/${props.userId}`, userData, {
+            headers: {
+                'Authorization': `Bearer ${Cookies.get('token')}`,
+                'Content-Type': 'application/json',
+            }
+        }).then((response) => {console.log(response.status, response.data)});
         console.log(values);
     }
     const [disabledInputs, setDisabledInputs] = useState({
@@ -45,7 +59,7 @@ export default function AccountInfo(props){
     const inputs = [
         {
             id: 1,
-            name: "nome",
+            name: "name",
             type: "text",
             label: "Nome",
             placeholder: props.name,
@@ -53,7 +67,7 @@ export default function AccountInfo(props){
         },
         {
             id: 2,
-            name: "cognome",
+            name: "surname",
             type: "text",
             label: "Cognome",
             placeholder: props.surname,
@@ -98,7 +112,7 @@ export default function AccountInfo(props){
     return (
         <div className={"form__wrapper"}>
             <div className={"form__container form__container--full-width form__container--account__info"}>
-                <form className="form form--account__info">
+                <form onSubmit={handleSubmit} className="form form--account__info">
                     {inputs.map((input, index) => (
                         <div key={input.id}>
                             {index % 2 === 0 && (

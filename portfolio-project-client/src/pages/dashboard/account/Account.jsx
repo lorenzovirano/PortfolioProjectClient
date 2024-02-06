@@ -13,8 +13,9 @@ import { useEffect, useState } from "react";
 
 export default function Account(props){
     const [username, setUsername] = useState("Username");
-    const [name, setName] = useState("Nome");
-    const [surname, setSurname] = useState("Cognome");
+    const [name, setName] = useState("Name");
+    const [surname, setSurname] = useState("Surname");
+    const [userId, setUserId] = useState("UserId");
     const { isLogged, loading } = useUserStatus();
 
 
@@ -34,6 +35,9 @@ export default function Account(props){
             }
             if(response.data.data.user.surname){
                 setSurname(response.data.data.user.surname);
+            }
+            if(response.data.data.user.userId) {
+                setUserId(response.data.data.user.userId);
             }
         })
     }
@@ -56,7 +60,7 @@ export default function Account(props){
                             <ProfileImage profileImage={"https://cdn.icon-icons.com/icons2/1369/PNG/512/-account-circle_89831.png"} name={username} role={"Fotografo"}/>
                         </Col>
                         <Col>
-                            <AccountInfo username={username} name={name} surname={surname}/>
+                            <AccountInfo username={username} name={name} surname={surname} userId={userId}/>
                         </Col>
                     </Row>
                     <Row>
