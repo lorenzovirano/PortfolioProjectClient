@@ -7,6 +7,11 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 export default function Login(){
+    const [values, setValues] = useState({
+        username: "",
+        password: ""
+    });
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -33,11 +38,6 @@ export default function Login(){
     const onChange = (e) => {
         setValues({...values, [e.target.name]: e.target.value})
     }
-
-    const [values, setValues] = useState({
-        username: "",
-        password: ""
-    });
 
     const inputs = [
         {

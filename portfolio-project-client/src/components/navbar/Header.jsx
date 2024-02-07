@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import useUserStatus from "../../utils/UserStatus";
 
 export default function Header(){
-    const logout = async () => {
+    const logout = () => {
         Cookies.remove('token')
         window.location.replace("/login");
     }

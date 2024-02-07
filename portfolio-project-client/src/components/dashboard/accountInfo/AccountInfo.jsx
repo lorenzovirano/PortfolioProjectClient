@@ -136,7 +136,7 @@ export default function AccountInfo(props){
                         <div className="form__submit__unlock" onClick={handleUnlockClick}>
                             <i className="bi bi-pencil"></i>
                         </div>
-                        <button className="form__submit__button">Submit</button>
+                        <button className="form__submit__button">Modifica utente</button>
                     </div>
                 </form>
             </div>
