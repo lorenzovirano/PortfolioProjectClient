@@ -116,6 +116,11 @@ ul{
 .form .form__text{
   font-size: 18px;
   margin-bottom: 40px;
+  line-height: 30px;
+}
+
+.form .form__text--light{
+  color: #dedede;
 }
 
 .form .form__input{
@@ -129,15 +134,34 @@ ul{
   border-radius: 12px;
 }
 
+.form .form__input--light label{
+  color: #dedede;
+}
+
+.form .form__input--light input{
+  color: #dedede;
+  border-color: #dedede;
+}
+
 .form .form__input input:disabled{
   border: 2px solid #bebebe;
   cursor: not-allowed;
+}
+
+.form__header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .form__submit{
   display: flex;
   justify-content: flex-end;
   margin-top: 50px;
+}
+
+.form--album h3{
+  margin: 20px 0;
 }
 
 .form__submit .form__submit__button{

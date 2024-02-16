@@ -73,7 +73,7 @@ export default function Login(){
                         {inputs.map((input) => (
                             <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange}/>
                         ))}
-                        <div className="form__submit login__submit">
+                        <div className="form__submit login--submit">
                             <button className="form__submit__button">Accedi</button>
                         </div>
                     </form>

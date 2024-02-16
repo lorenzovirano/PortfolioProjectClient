@@ -74,13 +74,13 @@ export default function Signup(props){
             <Header />
             <div className="form__wrapper">
                 <div className="form__container">
-                    <form onSubmit={handleSubmit} className="form form__signup">
+                    <form onSubmit={handleSubmit} className="form form--signup">
                         <h3 className="form__title">Registrazione</h3>
                         <p className="form__text">Compila i dati e registrati, potrai completare il profilo nella sezione account dedicata a te.</p>
                         {inputs.map((input) => (
                             <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange}/>
                         ))}
-                        <div className="form__submit signup__submit">
+                        <div className="form--submit signup--submit">
                             <button className="form__submit__button">Registrati</button>
                         </div>
                     </form>
