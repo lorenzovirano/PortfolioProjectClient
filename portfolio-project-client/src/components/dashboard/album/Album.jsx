@@ -1,11 +1,7 @@
 import './Album.css';
-import Container from "react-bootstrap/Container";
-import { Row } from "react-bootstrap";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import CreateAlbum from "../createAlbum/CreateAlbum";
 import EditAlbum from "../editAlbum/EditAlbum";
-import axios from "axios";
-import Cookies from "js-cookie";
 
 export default function Album(props) {
     const [isOpenCreate, setIsOpenCreate] = useState(false);

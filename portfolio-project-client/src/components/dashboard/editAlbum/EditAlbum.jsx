@@ -4,14 +4,15 @@ import {useState} from "react";
 import {Col, Row} from "react-bootstrap";
 import axios from "axios";
 import Cookies from "js-cookie";
+import {Link} from "react-router-dom";
 
-export default function EditAlbum({ setIsOpenEdit, title, description, albumId }) {
+export default function EditAlbum({ setIsOpenEdit, title, description, albumId, photographer }) {
     const [values, setValues] = useState({
-        name: "",
-        description: ""
+        title: title,
+        description: description
     });
 
-    const [error, setError] = useState(null); // Stato per memorizzare l'errore
+    const [error, setError] = useState(null);
 
     const onChange = (e) => {
         setValues({...values, [e.target.name]: e.target.value})
@@ -59,8 +60,6 @@ export default function EditAlbum({ setIsOpenEdit, title, description, albumId }
     return (
         <div className={"create-album"}>
             <div className="create-album__inner">
-
-                {/* Aggiunto un pulsante per chiudere il componente */}
                 <form onSubmit={handleSubmit} className="form form--album">
                     <div className="form__header">
                         <h3 className="form__title">{title}</h3>
@@ -84,8 +83,11 @@ export default function EditAlbum({ setIsOpenEdit, title, description, albumId }
                             {error && <p className="form__error">{error}</p>}
                         </div>
                     ))}
-                    <div className="form__submit login--submit">
+                    <div className="form__submit">
                         <button className="form__submit__button">Modifica</button>
+                        <Link to={`/album/${photographer}/${albumId}`}>
+                            <div className="form__submit__button form__submit__button--green">Apri pagina dell'album</div>
+                        </Link>
                     </div>
                 </form>
             </div>

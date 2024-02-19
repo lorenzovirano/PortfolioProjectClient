@@ -28,20 +28,22 @@ export default function AlbumList(props){
 
     return (
         <>
+            <h2 className={"component-title"}>Album creati</h2>
             <Col lg={3} md={4} sm={12}>
                 <Album title={"Crea nuovo album"} create/>
             </Col>
-                {albumDataList && albumDataList.length > 0 && albumDataList.map((albumData) => (
-                    <Col lg={3} md={4} sm={6}>
-                        <Album
-                            key={albumData.albumId}
-                            title={albumData.title}
-                            images={""}
-                            albumId={albumData.albumId}
-                            description={albumData.description}
-                        />
-                    </Col>
-                ))}
+            {albumDataList && albumDataList.length > 0 && albumDataList.map((albumData) => (
+                <Col lg={3} md={4} sm={6}>
+                    <Album
+                        key={albumData.albumId}
+                        title={albumData.title}
+                        images={""}
+                        albumId={albumData.albumId}
+                        description={albumData.description}
+                        photographer={props.photographer}
+                    />
+                </Col>
+            ))}
         </>
 
     )

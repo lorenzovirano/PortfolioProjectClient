@@ -12,6 +12,7 @@
 }
 
 .create-album__inner{
+    overflow: scroll;
     width: 80%;
     height: 80%;
     background: #222222;

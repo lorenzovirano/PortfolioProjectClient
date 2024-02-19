@@ -5,7 +5,6 @@ import {Col, Row} from "react-bootstrap";
 import ProfileImage from "../../../components/dashboard/profileImage/ProfileImage";
 import AccountInfo from "../../../components/dashboard/accountInfo/AccountInfo";
 import Footer from "../../../components/footer/Footer";
-import LatestWork from "../../../components/dashboard/latestWork/LatestWork";
 import useUserStatus from "../../../utils/UserStatus";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -80,11 +79,6 @@ export default function Account(props){
                     </Row>
                     <Row>
                         <AlbumList photographer={username} />
-                    </Row>
-                    <Row>
-                        <Col>
-                            <LatestWork />
-                        </Col>
                     </Row>
                 </Container>
                 <Footer />

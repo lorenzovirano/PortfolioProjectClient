@@ -1,0 +1,23 @@
+.container--album-page{
+    margin: 50px auto;
+}
+
+.album__description{
+    margin: 25px auto;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.album__photographer span{
+    font-weight: bold;
+}
+
+.form__submit--album{
+    margin: 50px auto;
+}
+
+.form__submit--album .form__submit__button{
+    width: fit-content;
+    padding: 15px;
+}

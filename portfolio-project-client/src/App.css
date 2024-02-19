@@ -158,6 +158,12 @@ ul{
   display: flex;
   justify-content: flex-end;
   margin-top: 50px;
+  gap: 25px;
+}
+
+.form__submit a{
+  text-align: center;
+  text-decoration: none;
 }
 
 .form--album h3{
@@ -181,6 +187,16 @@ ul{
 .form__submit .form__submit__button:hover{
   -webkit-box-shadow: 0 15px 20px -8px #fd6a6d;
   box-shadow: 0 15px 20px -8px #fd6a6d;
+}
+
+.form__submit .form__submit__button--green{
+  background: #76d39e;
+  -webkit-box-shadow: 0 10px 15px -5px #76d39e;
+  box-shadow: 0 10px 15px -5px #76d39e;
+}
+
+.form__submit .form__submit__button--green:hover{
+  box-shadow: 0 15px 20px -5px #76d39e;
 }
 
 .switch-container label{
@@ -221,6 +237,18 @@ ul{
 
 input:invalid[focused="true"] ~ span.form__input__error{
   display: block;
+}
+
+.page-title{
+  font-size: 48px;
+  font-weight: bold;
+  color: #FB4B4E;
+}
+
+.component-title{
+  font-size: 36px;
+  font-weight: bold;
+  color: #FB4B4E;
 }
 
 @media only screen and (max-width: 1000px) {
