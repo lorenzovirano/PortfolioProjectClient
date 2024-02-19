@@ -11,6 +11,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import AlbumList from "../../../components/dashboard/albumList/AlbumList";
+import useUserRole from "../../../utils/UserRole";
 
 export default function Account(props){
     const [username, setUsername] = useState("Username");
@@ -19,6 +20,7 @@ export default function Account(props){
     const [userId, setUserId] = useState("UserId");
     const [role, setRole] = useState("Role");
     const { isLogged, loading } = useUserStatus();
+    const { isPhotographer, loadingRole} = useUserRole()
 
 
     const getUserInfo = async () => {
@@ -53,8 +55,14 @@ export default function Account(props){
         getUserInfo();
     }, []);
 
-    if (loading) {
+    if (loading || loadingRole) {
         return <p>Loading...</p>;
+    }
+
+    if(isPhotographer){
+        console.log("Sono un fotografo")
+    } else {
+        console.log("Non sono un fotografo")
     }
 
     if (isLogged) {
