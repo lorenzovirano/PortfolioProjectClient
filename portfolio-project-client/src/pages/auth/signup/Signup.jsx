@@ -7,14 +7,18 @@ import axios from "axios";
 
 export default function Signup(props){
     const onChange = (e) => {
-        setValues({...values, [e.target.name]: e.target.value})
-    }
-
+        if (e.target.type === "checkbox") {
+            setValues({ ...values, [e.target.name]: e.target.checked });
+        } else {
+            setValues({ ...values, [e.target.name]: e.target.value });
+        }
+    };
     const [values, setValues] = useState({
         username: "",
         email: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
+        isPhotographer: false
     });
 
     const handleSubmit = async (e) => {
@@ -66,6 +70,19 @@ export default function Signup(props){
             errorMessage: "Le password non coincidono",
             pattern: values.password,
             required: true
+        },
+        {
+            id: 5,
+            name: "isPhotographer",
+            type: "checkbox",
+            label: "Sei un fotografo?",
+            required: true,
+            onChange: (e) => {
+                // Aggiorna lo stato di isPhotographer invertendo il valore corrente
+                setValues({ ...values, [e.target.name]: !values.isPhotographer });
+                // Stampa il valore aggiornato di isPhotographer nella console
+                console.log(`Valore di isPhotographer aggiornato: ${!values.isPhotographer}`);
+            },
         }
     ]
 
@@ -80,7 +97,7 @@ export default function Signup(props){
                         {inputs.map((input) => (
                             <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange}/>
                         ))}
-                        <div className="form--submit signup--submit">
+                        <div className="form__submit signup--submit">
                             <button className="form__submit__button">Registrati</button>
                         </div>
                     </form>

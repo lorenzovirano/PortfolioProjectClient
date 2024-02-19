@@ -1,0 +1,29 @@
+.create-album{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background: rgba(34, 34, 34, .5);
+}
+
+.create-album__inner{
+    width: 80%;
+    height: 80%;
+    background: #222222;
+    border-radius: 15px;
+    padding: 50px;
+    -webkit-box-shadow: 0 0 25px 5px rgba(222, 222, 222, 0.25);
+    box-shadow: 0 0 25px 5px rgba(222, 222, 222, 0.25);
+}
+
+.create-album__inner .close-icon{
+    font-size: 30px;
+    color: #dedede;
+    cursor: pointer;
+    text-align: right;
+}
