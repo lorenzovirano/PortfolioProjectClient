@@ -1,0 +1,9 @@
+.form__submit--photographer{
+    width: 100%;
+    justify-content: center;
+}
+
+.form__submit--photographer .form__submit__button{
+    width: fit-content;
+    padding: 15px 25px;
+}

@@ -63,9 +63,9 @@ export default function AlbumPage(){
                     </Row>
                     {isPhotographer ? (
                         <div className="form__submit form__submit--album">
-                            <Link to={`/chat/${photographer}`}>
+                            <Link to={`/photographer/${photographer}`}>
                                 <div className="form__submit__button form__submit__button--green">
-                                    Contatta fotografo
+                                    Contatta il fotografo
                                 </div>
                             </Link>
                         </div>

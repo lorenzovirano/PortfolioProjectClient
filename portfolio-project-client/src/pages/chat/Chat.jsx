@@ -3,7 +3,7 @@ import Header from "../../components/navbar/Header";
 import Footer from "../../components/footer/Footer";
 import Container from "react-bootstrap/Container";
 import {Col, Row} from "react-bootstrap";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 export default function Chat(props){
     let { photographer } = useParams();
@@ -46,8 +46,17 @@ export default function Chat(props){
                         </div>
                     </Col>
                 </Row>
+                <Row>
+                    <div className="form__submit form__submit--photographer">
+                        <Link to={`/photographer/${photographer}`}>
+                            <div className="form__submit__button form__submit__button--green">
+                                Torna alla pagina del fotografo
+                            </div>
+                        </Link>
+                    </div>
+                </Row>
             </Container>
-            <Footer />
+            <Footer/>
         </>
 
     )
