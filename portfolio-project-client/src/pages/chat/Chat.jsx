@@ -9,6 +9,7 @@ import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import ChatBubble from "../../components/chat/ChatBubble";
 import FormInput from "../../components/formInput/FormInput";
+import axios from "axios";
 
 export default function Chat(props){
     const { username } = useParams();
@@ -16,18 +17,32 @@ export default function Chat(props){
     const queryParams = new URLSearchParams(location.search);
     const photographer = queryParams.get('photographer');
     const [stompClient, setStompClient] = useState(null);
-    const [messagesReceived, setMessagesReceived] = useState([]);
     const [value, setValue] = useState("");
     const [messages, setMessages] = useState([])
+    const [historyMessages, setHistoryEssages] = useState([])
 
     const onChange = (e) => {
         setValue(e.target.value)
     }
 
 
-    const headers = {
-        Authorization: `Bearer ${Cookies.get("token")}`,
+    const config = {
+        headers: {
+            'Authorization': `Bearer ${Cookies.get('token')}`,
+        }
     };
+
+
+    const loadHistoryMessages = () => {
+        axios.get(`http://localhost:8000/app/messages/${username}/${photographer}`, config)
+            .then(response => {
+                console.log('Messaggi caricati con successo', response.data);
+                setHistoryEssages(response.data.data)
+            })
+            .catch(error => {
+                console.error('Si è verificato un errore durante il caricamento dei messaggi:', error);
+            });
+    }
 
     const setupStompClient = (username) => {
         const stompClient = new Client({
@@ -35,7 +50,7 @@ export default function Chat(props){
             reconnectDelay: 5000,
             heartbeatIncoming: 4000,
             heartbeatOutgoing: 4000,
-            connectHeaders: headers,
+            connectHeaders: config.headers,
         });
 
         stompClient.onConnect = () => {
@@ -60,29 +75,34 @@ export default function Chat(props){
             stompClient.publish({ destination: `/app/chat`, body: JSON.stringify(payload) });
             setValue("");
             setMessages(prevMessages => [...prevMessages, payload]);
-            console.dir(messages)
         }
     };
 
     const onMessageReceived = (data) => {
         const message = JSON.parse(data.body);
-        if (!messages.some(msg => String(msg.id) === String(message.id))) {
-            setMessages(prevMessages => [...prevMessages, message]);
+        if (message.senderId !== username) {
+            if (!messages.some(msg => msg.id === message.id)) {
+                setMessages(prevMessages => [...prevMessages, message]);
+            }
         }
-        console.dir(messages);
     };
+
+    useEffect(() => {
+        loadHistoryMessages();
+    })
 
 
     useEffect(() => {
-        setupStompClient(username);
-        // Cleanup della sottoscrizione e della connessione quando il componente viene smontato
+        if (!stompClient) {
+            setupStompClient(username);
+        }
         return () => {
             if (stompClient) {
                 stompClient.deactivate();
             }
         };
-    }, []);
 
+    });
     return(
         <>
             <Header/>
