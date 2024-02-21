@@ -1,0 +1,113 @@
+.latest-work{
+    margin-top: 50px;
+}
+.latest-work__cards{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.latest-work .latest-work__title{
+    font-size: 36px;
+    font-weight: bold;
+    color: #FB4B4E;
+}
+
+.latest-work__card__actions{
+    width: 100%;
+    display: flex;
+    }
+
+.latest-work__card__actions .latest-work__card__button{
+    border: none;
+    width: 50%;
+    padding: 15px;
+    font-size: 20px;
+    transition: .3s;
+}
+
+.latest-work__card__actions .latest-work__card__button:hover{
+    opacity: .7;
+}
+
+.latest-work__card__inputs-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.latest-work__card__inputs-wrapper .latest-work__card__input-wrapper:first-child{
+    margin-top: 15px;
+}
+
+.latest-work__card__inputs-wrapper .latest-work__card__input{
+    padding: 10px 15px;
+    border: 1px solid #222222;
+    border-radius: 10px;
+    width: 100%
+}
+
+.latest-work__card__inputs-wrapper .latest-work__card__input-wrapper{
+    width: calc(100% - 30px);
+}
+
+.latest-work__card__input-wrapper label{
+    margin-bottom: 5px;
+    display: block;
+}
+
+.latest-work__card__par--category{
+    opacity: .5;
+    text-transform: uppercase;
+}
+
+.latest-work__card__button:nth-child(1){
+    background: #76d39e;
+    color: #ffffff;
+}
+.latest-work__card__button:nth-child(2){
+    background: #FB4B4E;
+    color: #ffffff;
+}
+
+.latest-work__card__title{
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 15px 0 15px;
+}
+
+.latest-work__card{
+    width: 300px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.latest-work__card__image{
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center center;
+}
+
+.latest-work__card__par{
+    padding: 15px;
+}
+
+.latest-work__card__inner{
+    background: #fff;
+}
+
+.latest-work__card a{
+    text-decoration: none;
+    color: #222222;
+}
+
+@media only screen and (max-width: 600px) {
+    .latest-work__card{
+        width: 100%;
+    }
+}

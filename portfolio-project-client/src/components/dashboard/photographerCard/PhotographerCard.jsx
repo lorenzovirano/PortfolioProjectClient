@@ -18,7 +18,7 @@ export  default function PhotographerCard(props){
                             <div className="latest-work__card__inner">
                                 <h3 className="latest-work__card__title">{props.username}{}</h3>
                                 <p className="latest-work__card__par">Email: {props.email}</p>
-                                {isLogged && <div className="form__submit form__submit--album">
+                                {isLogged && <div className="form__submit form__submit--photographer">
                                     <Link to={`/photographer/${props.username}`}>
                                         <div className="form__submit__button form__submit__button--green">
                                             Contatta il fotografo
