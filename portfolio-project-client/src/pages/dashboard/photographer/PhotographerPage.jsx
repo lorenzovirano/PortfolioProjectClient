@@ -54,12 +54,12 @@ export default function PhotographerPage(props){
             <Container>
                 <Row>
                     <Col>
-                        <ProfileImage profileImage={"https://cdn.icon-icons.com/icons2/1369/PNG/512/-account-circle_89831.png"}  name={photographerInfo.name === 'Name' && photographerInfo.surname === 'Surname' ? photographerInfo.username : `${photographerInfo.name} ${photographerInfo.surname}`}  role={"Fotografo"}/>
+                        <ProfileImage profileImage={"https://cdn.icon-icons.com/icons2/1369/PNG/512/-account-circle_89831.png"}  name={photographerInfo.name === null && photographerInfo.surname === null ? photographerInfo.username : `${photographerInfo.name} ${photographerInfo.surname}`}  role={"Fotografo"}/>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        {isPhotographer &&
+                        {!isPhotographer &&
                             <div className="form__submit form__submit--photographer">
                                 <Link to={`/chat/${username}?photographer=${photographer}`}>
                                     <div className="form__submit__button form__submit__button--green">

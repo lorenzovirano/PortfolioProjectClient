@@ -34,14 +34,18 @@ export default function Chat(props){
 
 
     const loadHistoryMessages = () => {
-        axios.get(`http://localhost:8000/app/messages/${username}/${photographer}`, config)
-            .then(response => {
-                console.log('Messaggi caricati con successo', response.data);
-                setHistoryEssages(response.data.data)
-            })
-            .catch(error => {
-                console.error('Si è verificato un errore durante il caricamento dei messaggi:', error);
-            });
+        axios.request({
+            headers: {
+                'Authorization': `Bearer ${Cookies.get('token')}`,
+                'Content-Type': 'application/json',
+            },
+            method: "GET",
+            url: `http://localhost:8000/messages/${username}/${photographer}`
+        }).then(response => {
+            console.log(response.data.data)
+        }).catch(error => {
+            console.log('Si è verificato un errore durante il caricamento dei messaggi:', error);
+        });
     }
 
     const setupStompClient = (username) => {
@@ -118,7 +122,7 @@ export default function Chat(props){
                                     ))}
                                 </div>
                                 <div className="chat__input">
-                                    <FormInput placeholder={"Invia messaggio..."} type={"text"}  value={value} onChange={onChange}/>
+                                    <FormInput placeholder={"Invia messaggio..."} type={"text"}  value={value} onChange={onChange} className={"form__input--full-width"}/>
                                     <button className="chat__input--send">
                                         <i className="bi bi-send"></i>
                                     </button>
