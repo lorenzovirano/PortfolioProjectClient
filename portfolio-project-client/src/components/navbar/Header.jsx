@@ -26,6 +26,7 @@ export default function Header(){
                             </div>
                             <nav className="header__nav">
                                 <ul className="nav__list list">
+                                    <li className="nav__item"><Link to="/photographer/list" className={"nav__link"}>Fotografi</Link></li>
                                     <li className="nav__item"><Link to="/account" className={"nav__link"}>Account</Link></li>
                                     <li className="nav__item"><a href="#" className={"nav__link"} onClick={logout}>Logout</a></li>
                                 </ul>
@@ -48,6 +49,7 @@ export default function Header(){
                             </div>
                             <nav className="header__nav">
                                 <ul className="nav__list list">
+                                    <li className="nav__item"><Link to="/photographer/list" className={"nav__link"}>Fotografi</Link></li>
                                     <li className="nav__item"><Link to="/login" className={"nav__link"}>Login</Link></li>
                                     <li className="nav__item"><Link to="/signup" className={"nav__link"}>Signup</Link></li>
                                 </ul>

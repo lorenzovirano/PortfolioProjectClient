@@ -76,7 +76,6 @@ export default function Signup(props){
             name: "isPhotographer",
             type: "checkbox",
             label: "Sei un fotografo?",
-            required: true,
             onChange: (e) => {
                 // Aggiorna lo stato di isPhotographer invertendo il valore corrente
                 setValues({ ...values, [e.target.name]: !values.isPhotographer });

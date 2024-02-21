@@ -1,6 +1,7 @@
 import './PhotographerPage.css';
 import axios from "axios";
 import Cookies from "js-cookie";
+import { jwtDecode } from 'jwt-decode';
 import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import Header from "../../../components/navbar/Header";
@@ -16,6 +17,7 @@ export default function PhotographerPage(props){
     let { photographer } = useParams();
     const [ photographerInfo, setPhotographerInfo ] = useState({});
     const { isPhotographer, loadingRole} = useUserRole()
+    const [username, setUsername] = useState()
 
     const getPhotographerInfo = async () => {
         axios.request({
@@ -23,16 +25,28 @@ export default function PhotographerPage(props){
                 Authorization: `Bearer ${Cookies.get('token')}`
             },
             method: "GET",
-            url: `http://localhost:8000/api/v1/user/photographer/${photographer}`
+            url: `http://localhost:8000/home/photographer/${photographer}`
         }).then(response => {
             setPhotographerInfo(response.data.data);
             console.dir(response)
         })
     }
+    const getUsernameFromToken = () => {
+        const storedToken = Cookies.get('token');
+        if (storedToken) {
+            let tempDecodedToken = jwtDecode(storedToken);
+            setUsername(tempDecodedToken.sub)
+        }
+    }
 
     useEffect(() => {
         getPhotographerInfo();
+        getUsernameFromToken();
     }, []);
+
+    if (loadingRole) {
+        return <p>Loading...</p>;
+    }
 
     return(
         <>
@@ -47,7 +61,7 @@ export default function PhotographerPage(props){
                     <Col>
                         {isPhotographer &&
                             <div className="form__submit form__submit--photographer">
-                                <Link to={`/chat/${photographer}`}>
+                                <Link to={`/chat/${username}?photographer=${photographer}`}>
                                     <div className="form__submit__button form__submit__button--green">
                                         Manda un messaggio al fotografo
                                     </div>

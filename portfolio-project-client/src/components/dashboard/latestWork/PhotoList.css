@@ -26,10 +26,6 @@
     width: 300px;
     margin-top: 30px;
     cursor: pointer;
-    transition: .2s ease-in;
-}
-.latest-work__card:hover{
-    transform: rotate(3deg) scale(1.05);
 }
 
 .latest-work__card__image{
