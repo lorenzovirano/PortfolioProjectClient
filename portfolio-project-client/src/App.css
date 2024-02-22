@@ -265,6 +265,10 @@ input:invalid[focused="true"] ~ span.form__input__error{
   color: #FB4B4E;
 }
 
+.album-list-empty{
+  min-height: 200px;
+}
+
 @media only screen and (max-width: 1000px) {
   .form__container{
     width: 60%;

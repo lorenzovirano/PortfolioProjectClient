@@ -62,7 +62,7 @@ export default function PhotographerPage(props){
                         {!isPhotographer &&
                             <div className="form__submit form__submit--photographer">
                                 <Link to={`/chat/${username}?photographer=${photographer}`}>
-                                    <div className="form__submit__button form__submit__button--green">
+                                    <div className="form__submit__button form__submit__button--green form__submit__button--green-full-wdith">
                                         Manda un messaggio al fotografo
                                     </div>
                                 </Link>

@@ -8,7 +8,7 @@ import Account from "./pages/dashboard/account/Account";
 import AlbumPage from "./pages/album/AlbumPage";
 import PhotographerPage from "./pages/dashboard/photographer/PhotographerPage";
 import Chat from "./pages/chat/Chat";
-import PhotographerList from "./pages/photographerList/PhotographerList";
+import PhotographerListPage from "./pages/photographerList/PhotographerListPage";
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
                   <Route path="/chat/:username" element={<Chat />} />
                   <Route path="/album/:photographer/:albumId" element={<AlbumPage />} />
                   <Route path="/photographer/:photographer" element={<PhotographerPage />} />
-                  <Route path="/photographer/list" element={<PhotographerList />} />
+                  <Route path="/photographer/list" element={<PhotographerListPage />} />
               </Routes>
           </BrowserRouter>
       </div>

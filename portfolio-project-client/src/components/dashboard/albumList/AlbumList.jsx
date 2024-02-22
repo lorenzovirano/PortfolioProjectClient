@@ -1,12 +1,15 @@
 import './AlbumList.css';
 import axios from "axios";
 import Cookies from "js-cookie";
-import {useEffect, useState} from "react";
-import {Col} from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Col } from "react-bootstrap";
 import Album from "../album/Album";
+import useUserStatus from "../../../utils/UserStatus";
 
-export default function AlbumList(props){
+export default function AlbumList(props) {
     const [albumDataList, setAlbumDataList] = useState([]);
+    const {username} = useUserStatus();
+    const isCurrentPhotographer = username === props.photographer;
 
     useEffect(() => {
         const getPhotographerAlbums = async () => {
@@ -26,25 +29,37 @@ export default function AlbumList(props){
         getPhotographerAlbums();
     }, [props.photographer]);
 
+
+
     return (
         <>
-            <h2 className={"component-title"}>Album creati</h2>
-            <Col lg={3} md={4} sm={12}>
-                <Album title={"Crea nuovo album"} create/>
-            </Col>
-            {albumDataList && albumDataList.length > 0 && albumDataList.map((albumData) => (
-                <Col lg={3} md={4} sm={6}>
-                    <Album
-                        key={albumData.albumId}
-                        title={albumData.title}
-                        images={""}
-                        albumId={albumData.albumId}
-                        description={albumData.description}
-                        photographer={props.photographer}
-                    />
-                </Col>
-            ))}
+            {albumDataList && albumDataList.length > 0 ? (
+                <>
+                    <h2 className={"component-title"}>Album creati</h2>
+                    {isCurrentPhotographer && (
+                        <Col lg={3} md={4} sm={12}>
+                            <Album title={"Crea nuovo album"} create />
+                        </Col>
+                    )}
+                    {albumDataList.map((albumData) => (
+                        <Col lg={3} md={4} sm={6} key={albumData.albumId}>
+                            <Album
+                                title={albumData.title}
+                                images={""}
+                                albumId={albumData.albumId}
+                                description={albumData.description}
+                                photographer={props.photographer}
+                            />
+                        </Col>
+                    ))}
+                </>
+            ) : (
+                <div className={"album-list-empty"}>
+                    <div className="album-list-empty__par">
+                        Mi dispiace, al momento il fotografo non ha ancora caricato nessun album, riprova fra un po' di tempo!
+                    </div>
+                </div>
+            )}
         </>
-
-    )
+    );
 }

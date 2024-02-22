@@ -4,6 +4,7 @@ import useUserStatus from "../../../utils/UserStatus";
 
 export  default function PhotographerCard(props){
     const { isLogged, loading } = useUserStatus();
+    const linkTo = isLogged ? `/photographer/${props.username}` : '/login';
 
     if (loading) {
         return <p>Loading...</p>;
@@ -13,7 +14,7 @@ export  default function PhotographerCard(props){
             <div className={"latest-work"}>
                 <div className="latest-work__cards">
                     <div className="latest-work__card photographer__card">
-                        <Link to={`/photographer/${props.username}`}>
+                        <Link to={linkTo}>
                             <div style={{backgroundImage: `url(${props.profileImage})`}} className="latest-work__card__image" />
                             <div className="latest-work__card__inner">
                                 <h3 className="latest-work__card__title">{props.username}{}</h3>

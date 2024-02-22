@@ -5,7 +5,10 @@
 }
 
 .form__submit--photographer .form__submit__button{
-    width: fit-content;
     padding: 15px 25px;
     margin-bottom: 25px;
+}
+
+.form__submit__button.form__submit__button--green.form__submit__button--green-full-wdith{
+    width: fit-content;
 }

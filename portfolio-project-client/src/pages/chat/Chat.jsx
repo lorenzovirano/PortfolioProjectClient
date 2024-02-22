@@ -134,7 +134,7 @@ export default function Chat(props){
                 <Row>
                     <div className="form__submit form__submit--photographer">
                         <Link to={`/photographer/${photographer}`}>
-                            <div className="form__submit__button form__submit__button--green">
+                            <div className="form__submit__button form__submit__button--green form__submit__button--green-full-wdith">
                                 Torna alla pagina del fotografo
                             </div>
                         </Link>

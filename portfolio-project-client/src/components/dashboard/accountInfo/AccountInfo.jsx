@@ -4,8 +4,10 @@ import {useState} from "react";
 import {Col, Row} from "react-bootstrap";
 import axios from "axios";
 import Cookies from "js-cookie";
+import useUserStatus from "../../../utils/UserStatus";
 
 export default function AccountInfo(props){
+    const { username: currentUser } = useUserStatus();
     const [values, setValues] = useState({
         name: "",
         surname: "",
@@ -132,12 +134,14 @@ export default function AccountInfo(props){
                             )}
                         </div>
                     ))}
-                    <div className="form__submit signup__submit">
-                        <div className="form__submit__unlock" onClick={handleUnlockClick}>
-                            <i className="bi bi-pencil"></i>
+                    {currentUser === props.username && ( // Mostra il pezzo di codice solo se l'utente loggato è quello che visita la pagina
+                        <div className="form__submit signup__submit">
+                            <div className="form__submit__unlock" onClick={handleUnlockClick}>
+                                <i className="bi bi-pencil"></i>
+                            </div>
+                            <button className="form__submit__button">Modifica utente</button>
                         </div>
-                        <button className="form__submit__button">Modifica utente</button>
-                    </div>
+                    )}
                 </form>
             </div>
         </div>

@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import AlbumList from "../../../components/dashboard/albumList/AlbumList";
 import useUserRole from "../../../utils/UserRole";
+import PhotographerList from "../../photographerList/PhotographerList";
 
 export default function Account(props){
     const [username, setUsername] = useState("Username");
@@ -58,12 +59,6 @@ export default function Account(props){
         return <p>Loading...</p>;
     }
 
-    if(isPhotographer){
-        console.log("Sono un fotografo")
-    } else {
-        console.log("Non sono un fotografo")
-    }
-
     if (isLogged) {
         return (
             <>
@@ -78,7 +73,11 @@ export default function Account(props){
                         </Col>
                     </Row>
                     <Row>
-                        <AlbumList photographer={username} />
+                        {isPhotographer ? (
+                            <AlbumList photographer={username} />
+                        ) : (
+                            <PhotographerList />
+                        )}
                     </Row>
                 </Container>
                 <Footer />
