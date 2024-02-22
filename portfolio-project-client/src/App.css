@@ -133,6 +133,20 @@ ul{
   border: 2px solid #222222;
   border-radius: 12px;
 }
+.form .form__input--full-width{
+  width: 100%;
+}
+
+.isPhotographerSwitch{
+  cursor: pointer;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: #222222;
+  border-radius: 10px;
+  color: #ededed;
+  font-weight: bold;
+  width: fit-content;
+}
 
 .form .form__input--light label{
   color: #dedede;

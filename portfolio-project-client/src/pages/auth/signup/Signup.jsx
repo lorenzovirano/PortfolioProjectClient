@@ -1,28 +1,45 @@
 import './Signup.css';
 import Header from "../../../components/navbar/Header";
 import FormInput from "../../../components/formInput/FormInput";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Footer from "../../../components/footer/Footer";
 import axios from "axios";
 
-export default function Signup(props){
-    const onChange = (e) => {
-        if (e.target.type === "checkbox") {
-            setValues({ ...values, [e.target.name]: e.target.checked });
+export default function Signup(props) {
+    const [ isPhotographerState, setIsPhotographerState ] = useState(false)
+    const [ isPhotographerMessage, setIsPhotographerMessage ] = useState("")
+
+    const handleIsPhotographerMessage = () => {
+        if(isPhotographerState){
+            setIsPhotographerMessage("Sono un fotografo")
         } else {
-            setValues({ ...values, [e.target.name]: e.target.value });
+            setIsPhotographerMessage("Non sono un fotografo")
         }
-    };
+    }
+
+    const handleIsPhotographerState = () => {
+        setIsPhotographerState(!isPhotographerState)
+        setValues({
+            ...values,
+            is_photographer: !isPhotographerState
+        });
+    }
+
     const [values, setValues] = useState({
         username: "",
         email: "",
         password: "",
         confirmPassword: "",
-        isPhotographer: false
+        is_photographer: false,
     });
+
+    const onChange = (e) => {
+        setValues({ ...values, [e.target.name]: e.target.value });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(values)
         try {
             const response = await axios.post("http://localhost:8000/auth/register", values);
             console.log("User Created:", response.data);
@@ -30,7 +47,7 @@ export default function Signup(props){
         } catch (error) {
             console.error("User not created", error);
         }
-    }
+    };
 
     const inputs = [
         {
@@ -58,7 +75,7 @@ export default function Signup(props){
             label: "Password",
             placeholder: "Password",
             errorMessage: "Lo password deve contenere 8-20 caratteri, un carattere speciale ecc..",
-            pattern:`^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+            pattern: "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$",
             required: true
         },
         {
@@ -70,22 +87,14 @@ export default function Signup(props){
             errorMessage: "Le password non coincidono",
             pattern: values.password,
             required: true
-        },
-        {
-            id: 5,
-            name: "isPhotographer",
-            type: "checkbox",
-            label: "Sei un fotografo?",
-            onChange: (e) => {
-                // Aggiorna lo stato di isPhotographer invertendo il valore corrente
-                setValues({ ...values, [e.target.name]: !values.isPhotographer });
-                // Stampa il valore aggiornato di isPhotographer nella console
-                console.log(`Valore di isPhotographer aggiornato: ${!values.isPhotographer}`);
-            },
         }
-    ]
+    ];
 
-    return(
+    useEffect(() => {
+        handleIsPhotographerMessage()
+    })
+
+    return (
         <>
             <Header />
             <div className="form__wrapper">
@@ -94,14 +103,17 @@ export default function Signup(props){
                         <h3 className="form__title">Registrazione</h3>
                         <p className="form__text">Compila i dati e registrati, potrai completare il profilo nella sezione account dedicata a te.</p>
                         {inputs.map((input) => (
-                            <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange}/>
+                            <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange} />
                         ))}
+                        <div className={"isPhotographerSwitch"} onClick={handleIsPhotographerState}>
+                            {isPhotographerMessage}
+                        </div>
                         <div className="form__submit signup--submit">
                             <button className="form__submit__button">Registrati</button>
                         </div>
                     </form>
                 </div>
-                <div className="form__banner" style={{backgroundImage: `url('https://images.unsplash.com/photo-1517956050595-8932d6d6b740?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`}}>
+                <div className="form__banner" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1517956050595-8932d6d6b740?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')` }}>
                     <div className="form__banner__inner">
                         <h4 className="form__banner__title">Portfolio Project è facile da utilizzare</h4>
                         <p className="form__banner__text">Accedi, carica i tuoi lavori e potrai avere in pochissimo tempo una pagina personale da poter condividere con i tuoi clienti!</p>
@@ -110,5 +122,5 @@ export default function Signup(props){
             </div>
             <Footer />
         </>
-    )
+    );
 }
