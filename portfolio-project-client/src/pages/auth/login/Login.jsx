@@ -14,21 +14,13 @@ export default function Login(){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post("http://localhost:8000/auth/login", values);
+        await axios.post("http://localhost:8000/auth/login", values, {}).then((response) => {
             console.log("Utente loggato:", response.data.data.user);
-            Cookies.set('token', response.data.data.jwt, { expires: 7, secure: true });
+            Cookies.set('token', response.data.data.jwt, {expires: 7, secure: true});
             window.location.replace("/account");
-        } catch (error) {
-            if (error.response) {
-                console.error("Risposta dal server:", error.response.data);
-                console.error("Stato della risposta:", error.response.status);
-            } else if (error.request) {
-                console.error("La richiesta è stata effettuata, ma nessuna risposta ricevuta");
-            } else {
-                console.error("Errore durante la configurazione della richiesta:", error.message);
-            }
-        }
+        }).catch((error) => {
+            console.log("Si è verificato un errore: " + error)
+        });
     }
 
     const onChange = (e) => {

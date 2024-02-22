@@ -84,7 +84,6 @@ export default function Account(props){
             </>
         )
     } else {
-        console.log(isLogged);
-        return <p>Utente non loggato</p>;
+        window.location.replace("/login")
     }
 }
