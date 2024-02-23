@@ -58,18 +58,33 @@ export default function Chat(props){
         });
 
         stompClient.onConnect = () => {
+            console.log("STOMP connection established.");
             stompClient.subscribe(`/user/${username}/queue/messages`, (data) => {
                 onMessageReceived(data);
             });
+        };
+
+        stompClient.onStompError = (error) => {
+            console.error("STOMP connection error:", error);
+            setTimeout(() => {
+                console.log("Riprova la connessione STOMP...");
+                setupStompClient(username);
+            }, 5000); // Riprova la connessione dopo 5 secondi
         };
 
         stompClient.activate();
         setStompClient(stompClient);
     };
 
+    useEffect(() => {
+        if (stompClient && !stompClient.connected) {
+            console.warn("STOMP client is not connected.");
+        }
+    }, [stompClient]);
+
     const sendMessage = (e) => {
         e.preventDefault();
-        if (value && stompClient) {
+        if (value && stompClient && stompClient.connected) {
             const payload = {
                 senderId: username,
                 recipientId: photographer,
@@ -79,8 +94,11 @@ export default function Chat(props){
             stompClient.publish({ destination: `/app/chat`, body: JSON.stringify(payload) });
             setValue("");
             setMessages(prevMessages => [...prevMessages, payload]);
+        } else {
+            console.error("No active STOMP connection.");
         }
     };
+
 
     const onMessageReceived = (data) => {
         const message = JSON.parse(data.body);
@@ -92,7 +110,7 @@ export default function Chat(props){
     };
 
     useEffect(() => {
-        loadHistoryMessages();
+        //loadHistoryMessages();
     })
 
 
@@ -105,8 +123,8 @@ export default function Chat(props){
                 stompClient.deactivate();
             }
         };
+    }, [stompClient, username]);
 
-    });
     return(
         <>
             <Header/>

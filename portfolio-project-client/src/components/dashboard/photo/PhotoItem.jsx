@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import {Col} from "react-bootstrap";
 
 export default function PhotoItem({ photo, onDelete }) {
     const defaultImageUrl = 'https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg';

@@ -11,7 +11,7 @@ export default function Header(){
         window.location.replace("/login");
     }
 
-    const { isLogged, loading } = useUserStatus();
+    const { isLogged } = useUserStatus();
 
     if(isLogged){
         return(

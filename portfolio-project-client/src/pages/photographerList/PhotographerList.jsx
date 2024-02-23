@@ -1,8 +1,5 @@
 import './PhotographerList.css';
-import Header from "../../components/navbar/Header";
-import Footer from "../../components/footer/Footer";
-import Container from "react-bootstrap/Container";
-import {Col, Row} from "react-bootstrap";
+import {Col} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import PhotographerCard from "../../components/dashboard/photographerCard/PhotographerCard";

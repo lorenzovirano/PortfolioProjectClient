@@ -266,6 +266,7 @@ input:invalid[focused="true"] ~ span.form__input__error{
 }
 
 .album-list-empty{
+  margin-top: 50px;
   min-height: 200px;
 }
 

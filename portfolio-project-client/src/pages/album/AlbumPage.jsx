@@ -10,7 +10,6 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import {useEffect, useState} from "react";
 import PhotoList from "../../components/dashboard/photo/PhotoList";
-import PhotoItem from "../../components/dashboard/photo/PhotoItem";
 export default function AlbumPage(){
     let { albumId, photographer } = useParams();
     const { isLogged, loading } = useUserStatus();
