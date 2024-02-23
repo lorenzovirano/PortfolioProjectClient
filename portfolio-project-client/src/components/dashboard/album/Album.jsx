@@ -7,7 +7,6 @@ export default function Album(props) {
     const [isOpenCreate, setIsOpenCreate] = useState(false);
     const [isOpenEdit, setIsOpenEdit] = useState(false);
 
-
     const handleOpenCreate = () => {
         console.log("Apro creazione album");
         setIsOpenCreate(true);
@@ -17,9 +16,6 @@ export default function Album(props) {
         console.log("Apro edit album");
         setIsOpenEdit(true);
     };
-
-
-
     return (
         <>
             <div className={"album"}>

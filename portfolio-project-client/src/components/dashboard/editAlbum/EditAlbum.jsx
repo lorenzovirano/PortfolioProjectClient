@@ -5,12 +5,15 @@ import {Col, Row} from "react-bootstrap";
 import axios from "axios";
 import Cookies from "js-cookie";
 import {Link} from "react-router-dom";
+import useUserStatus from "../../../utils/UserStatus";
 
 export default function EditAlbum({ setIsOpenEdit, title, description, albumId, photographer }) {
     const [values, setValues] = useState({
         title: title,
         description: description
     });
+    const { username } = useUserStatus();
+    const isCurrentPhotographer = username === photographer;
 
     const [error, setError] = useState(null);
 
@@ -84,7 +87,9 @@ export default function EditAlbum({ setIsOpenEdit, title, description, albumId, 
                         </div>
                     ))}
                     <div className="form__submit">
-                        <button className="form__submit__button">Modifica</button>
+                        {isCurrentPhotographer && (
+                            <button className="form__submit__button">Modifica</button>
+                        )}
                         <Link to={`/album/${photographer}/${albumId}`}>
                             <div className="form__submit__button form__submit__button--green">Apri pagina dell'album</div>
                         </Link>

@@ -7,8 +7,8 @@ import Album from "../album/Album";
 import useUserStatus from "../../../utils/UserStatus";
 
 export default function AlbumList(props) {
+    const { username } = useUserStatus();
     const [albumDataList, setAlbumDataList] = useState([]);
-    const {username} = useUserStatus();
     const isCurrentPhotographer = username === props.photographer;
 
     useEffect(() => {
@@ -54,12 +54,22 @@ export default function AlbumList(props) {
                     ))}
                 </>
             ) : (
-                <div className={"album-list-empty"}>
-                    <div className="album-list-empty__par">
-                        Mi dispiace, al momento il fotografo non ha ancora caricato nessun album, riprova fra un po' di tempo!
-                    </div>
-                </div>
+                <>
+                    {isCurrentPhotographer ? (
+                        <Col lg={3} md={4} sm={12}>
+                            <Album title={"Crea nuovo album"} create />
+                        </Col>
+                    ) : (
+                        <div className={"album-list-empty"}>
+                            <div className="album-list-empty__par">
+                                Mi dispiace, al momento il fotografo non ha ancora caricato nessun album, riprova fra un
+                                po' di tempo!
+                            </div>
+                        </div>
+                    )}
+                </>
             )}
         </>
     );
+
 }
