@@ -1,8 +1,11 @@
 import React, {useState} from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import useUserStatus from "../../../utils/UserStatus";
 
-export default function PhotoItem({ photo, onDelete }) {
+export default function PhotoItem({ photo, onDelete, photographer }) {
+    const { username } = useUserStatus();
+    const isCurrentPhotographer = username === photographer;
     const defaultImageUrl = 'https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg';
     const [editing, setEditing] = useState(false);
     const [editedPhoto, setEditedPhoto] = useState({
@@ -51,7 +54,7 @@ export default function PhotoItem({ photo, onDelete }) {
 
     return (
         <div className={`latest-work__card`}>
-            <div className="latest-work__card__image" style={{ backgroundImage: `url(${photo.path || defaultImageUrl})` }} />
+            <div className="latest-work__card__image" style={{ backgroundImage: `url("${photo.path || defaultImageUrl}")` }} />
             <div className="latest-work__card__inner">
                 {editing ? (
                     <div className={"latest-work__card__inputs-wrapper"}>
@@ -88,14 +91,16 @@ export default function PhotoItem({ photo, onDelete }) {
                         <h3 className="latest-work__card__title">{editedPhoto.title}</h3>
                         <p className="latest-work__card__par">{editedPhoto.description}</p>
                         <p className="latest-work__card__par latest-work__card__par--category">{editedPhoto.category}</p>
-                        <div className="latest-work__card__actions">
-                            <button className="latest-work__card__button" onClick={handleEdit}>
-                                <i className="bi bi-pencil-fill"></i>
-                            </button>
-                            <button className="latest-work__card__button" onClick={handleDelete}>
-                                <i className="bi bi-trash3-fill"></i>
-                            </button>
-                        </div>
+                        {isCurrentPhotographer && (
+                            <div className="latest-work__card__actions">
+                                <button className="latest-work__card__button" onClick={handleEdit}>
+                                    <i className="bi bi-pencil-fill"></i>
+                                </button>
+                                <button className="latest-work__card__button" onClick={handleDelete}>
+                                    <i className="bi bi-trash3-fill"></i>
+                                </button>
+                            </div>
+                        )}
                     </>
                 )}
             </div>

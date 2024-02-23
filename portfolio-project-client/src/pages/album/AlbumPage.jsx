@@ -1,25 +1,28 @@
-import './AlbumPage.css'
-import {Link, useParams} from "react-router-dom";
+import './AlbumPage.css';
+import { Link, useParams } from "react-router-dom";
 import Header from "../../components/navbar/Header";
 import Container from "react-bootstrap/Container";
 import Footer from "../../components/footer/Footer";
 import useUserStatus from "../../utils/UserStatus";
 import useUserRole from "../../utils/UserRole";
-import {Button, Col, Form, Modal, Row} from "react-bootstrap";
+import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import axios from "axios";
 import Cookies from "js-cookie";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import PhotoList from "../../components/dashboard/photo/PhotoList";
-export default function AlbumPage(){
+
+export default function AlbumPage() {
     let { albumId, photographer } = useParams();
+    const { username } = useUserStatus();
+    const isCurrentPhotographer = username === photographer;
     const { isLogged, loading } = useUserStatus();
-    const { isPhotographer, loadingRole} = useUserRole()
-    const [albumInfo, setAlbumInfo] = useState([])
+    const { isPhotographer, loadingRole } = useUserRole();
+    const [albumInfo, setAlbumInfo] = useState([]);
     const [uploading, setUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
     const [showModal, setShowModal] = useState(false);
     const [photoFormData, setPhotoFormData] = useState({
-        photos: [],
+        photo: null, // Cambiato da un array a un singolo file
         title: "",
         description: "",
         category: "",
@@ -27,13 +30,7 @@ export default function AlbumPage(){
     const config = {
         headers: {
             'Authorization': `Bearer ${Cookies.get('token')}`,
-        },
-        onUploadProgress: (progressEvent) => {
-            const progress = Math.round(
-                (progressEvent.loaded / progressEvent.total) * 100
-            );
-            setUploadProgress(progress);
-        },
+        }
     };
 
     const handleCloseModal = () => setShowModal(false);
@@ -51,7 +48,10 @@ export default function AlbumPage(){
     }
 
     const handlePhotoInputChange = (e) => {
-        setPhotoFormData({ ...photoFormData, photos: e.target.files });
+        if (e.target.files.length > 0) {
+            const selectedFile = e.target.files[0]; // Preleva solo il primo file
+            setPhotoFormData({ ...photoFormData, photo: selectedFile });
+        }
     };
 
     const handlePhotoFormChange = (e) => {
@@ -60,24 +60,45 @@ export default function AlbumPage(){
 
     const handleUploadPhotos = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        for (let i = 0; i < photoFormData.photos.length; i++) {
-            formData.append("photos", photoFormData.photos[i]);
+
+        // Verifica se è stato selezionato un file
+        if (!photoFormData.photo) {
+            console.error("Nessun file selezionato per l'upload.");
+            return;
         }
-        formData.append("title", photoFormData.title);
-        formData.append("description", photoFormData.description);
-        formData.append("category", photoFormData.category);
+
+        // Costruisci il FormData
+        const formData = new FormData();
+        formData.append("file", photoFormData.photo);
+
+        // Prepara il JSON payload
+        const jsonPayload = {
+            title: photoFormData.title,
+            description: photoFormData.description,
+            category: photoFormData.category,
+        };
 
         try {
             setUploading(true);
             const response = await axios.post(
-                `http://localhost:8000/photographer/album/${albumId}/upload`,
+                `http://localhost:8000/photographer/picture/upload/${albumId}`,
                 formData,
-                config
+                {
+                    headers: {
+                        'Authorization': `Bearer ${Cookies.get('token')}`,
+                        'Content-Type': 'multipart/form-data'
+                    },
+                    params: {
+                        pictureCreateDTO: JSON.stringify(jsonPayload) // Invia i campi come query parameters in un unico oggetto
+                    },
+                    onUploadProgress: progressEvent => {
+                        const progress = (progressEvent.loaded / progressEvent.total) * 100;
+                        setUploadProgress(progress);
+                    }
+                }
             );
             console.log("Upload completato:", response.data);
-            // Aggiorna lo stato dell'albumInfo con le nuove foto caricate
-            // getAlbumInfo();
+            getAlbumInfo();
         } catch (error) {
             console.error(
                 "Si è verificato un errore durante l'upload delle foto:",
@@ -87,7 +108,7 @@ export default function AlbumPage(){
             setUploading(false);
             setUploadProgress(0);
             setPhotoFormData({
-                photos: [],
+                photo: null,
                 title: "",
                 description: "",
                 category: "",
@@ -95,6 +116,7 @@ export default function AlbumPage(){
             handleCloseModal();
         }
     };
+
 
     const handlePhotoDelete = (deletedPhotoId) => {
         axios.post(`http://localhost:8000/photographer/picture/delete/${deletedPhotoId}`, null, config)
@@ -112,8 +134,6 @@ export default function AlbumPage(){
 
     useEffect(() => {
         getAlbumInfo();
-        console.log(albumInfo)
-        console.log(albumInfo.pictures)
     }, []);
 
     if (loading || loadingRole) {
@@ -139,7 +159,7 @@ export default function AlbumPage(){
                         </Col>
                     </Row>
                     <Row>
-                        <PhotoList photos={albumInfo.pictures || []} onDelete={handlePhotoDelete}/>
+                        <PhotoList photos={albumInfo.pictures || []} onDelete={handlePhotoDelete} photographer={photographer}/>
                     </Row>
                     <Row>
                         <Col>
@@ -149,29 +169,30 @@ export default function AlbumPage(){
                                 </Modal.Header>
                                 <Modal.Body>
                                     <Form onSubmit={handleUploadPhotos}>
-                                        <Form.Group controlId="photo" style={{marginTop: "25px"}}>
+                                        <Form.Group controlId="photo" style={{ marginTop: "25px" }}>
                                             <Form.Label>Foto</Form.Label>
                                             <Form.Control
                                                 type="file"
                                                 accept="image/*"
-                                                multiple
                                                 onChange={handlePhotoInputChange}
-                                                disabled={uploading}
                                             />
                                         </Form.Group>
-                                        <Form.Group controlId="title" style={{marginTop: "25px"}}>
+                                        <Form.Group controlId="title" style={{ marginTop: "25px" }}>
                                             <Form.Label>Titolo</Form.Label>
                                             <Form.Control
+                                                name={"title"}
                                                 type="text"
                                                 placeholder="Inserisci il titolo"
                                                 value={photoFormData.title}
                                                 onChange={handlePhotoFormChange}
                                                 required
                                             />
+
                                         </Form.Group>
-                                        <Form.Group controlId="description" style={{marginTop: "25px"}}>
+                                        <Form.Group controlId="description" style={{ marginTop: "25px" }}>
                                             <Form.Label>Descrizione</Form.Label>
                                             <Form.Control
+                                                name={"description"}
                                                 as="textarea"
                                                 placeholder="Inserisci la descrizione"
                                                 value={photoFormData.description}
@@ -179,9 +200,10 @@ export default function AlbumPage(){
                                                 required
                                             />
                                         </Form.Group>
-                                        <Form.Group controlId="category" style={{marginTop: "25px"}}>
+                                        <Form.Group controlId="category" style={{ marginTop: "25px" }}>
                                             <Form.Label>Categoria</Form.Label>
                                             <Form.Control
+                                                name={"category"}
                                                 type="text"
                                                 placeholder="Inserisci la categoria"
                                                 value={photoFormData.category}
@@ -192,18 +214,25 @@ export default function AlbumPage(){
                                     </Form>
                                 </Modal.Body>
                                 <Modal.Footer>
-                                    <Button variant="secondary" onClick={handleCloseModal} style={{backgroundColor: "#FB4B4E", border: "none"}}>
+                                    <Button variant="secondary" onClick={handleCloseModal} style={{ backgroundColor: "#FB4B4E", border: "none" }} disabled={uploading}>
                                         Chiudi
                                     </Button>
-                                    <Button variant="primary" onClick={handleUploadPhotos} style={{backgroundColor: "#76d39e", border: "none"}}>
-                                        Carica Foto
+                                    <Button variant="primary" onClick={handleUploadPhotos} style={{ backgroundColor: "#76d39e", border: "none" }} disabled={uploading}>
+                                        {uploading ? 'Caricamento...' : 'Carica Foto'}
                                     </Button>
                                 </Modal.Footer>
                             </Modal>
                             {uploading && <progress value={uploadProgress} max={100} />}
                         </Col>
                     </Row>
-                    {!isPhotographer ? (
+                    {isCurrentPhotographer && (
+                        <div className="form__submit form__submit--album">
+                            <button className="form__submit__button" onClick={handleShowModal} disabled={uploading}>
+                                Carica foto
+                            </button>
+                        </div>
+                    )}
+                    {!isPhotographer && (
                         <div className="form__submit form__submit--album">
                             <Link to={`/photographer/${photographer}`}>
                                 <div className="form__submit__button form__submit__button--green">
@@ -211,15 +240,9 @@ export default function AlbumPage(){
                                 </div>
                             </Link>
                         </div>
-                    ) : (
-                        <div className="form__submit form__submit--album">
-                            <button className="form__submit__button" onClick={handleShowModal}>
-                                Carica foto
-                            </button>
-                        </div>
                     )}
                 </Container>
-                <Footer/>
+                <Footer />
             </>
         )
     } else {
